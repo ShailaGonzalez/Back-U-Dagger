@@ -3,5 +3,9 @@
     "@vis.gl/react-google-maps": "^1.1.0",
     "axios": "^1.7.5",
     "react-scripts": "^5.0.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.57.0",
+    "eslint-plugin-import": "^2.29.1"
   }
 }
