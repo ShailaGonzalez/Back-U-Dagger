@@ -16,11 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 
 @RestController
-public class Userscontroller {
+public class UsersController {
 
     private final UsersService usersService;
 
-    public Userscontroller(UsersService usersService) {
+    public UsersController(UsersService usersService) {
         this.usersService = usersService;
 
     }
@@ -28,7 +28,7 @@ public class Userscontroller {
     @GetMapping("/users") /// hacer el get en postman
     public List<Users> getUsers() {
         return usersService.getUsers();
-    }
+   }
 
     @PostMapping("/users") /// hacer el post en postman y comprobarlo en pgadmin
     public ResponseEntity<Object> addUsers(@RequestBody Users users) {
@@ -50,3 +50,4 @@ public class Userscontroller {
         return usersService.deleteUser(id);
     }
 }
+
