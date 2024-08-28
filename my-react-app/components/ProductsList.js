@@ -3,44 +3,44 @@ import { getProducts, deleteProduct } from '../services/productService';
 import { Link } from 'react-router-dom';
 
 const ProductsList = () => {
-  // Estado para almacenar la lista de productos y posibles errores
+  // Estados para productos y errores
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);
 
-  // Efecto para obtener los productos cuando el componente se monta
+  // Obtener productos al montar el componente
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const data = await getProducts(); // Llama al servicio para obtener productos
-        setProducts(data); // Guarda los productos en el estado
+        const data = await getProducts();
+        setProducts(data);
       } catch (err) {
-        setError(err.message); // Maneja errores
+        setError('Failed to fetch products.'); // Mensaje de error amigable
       }
     };
-    fetchProducts(); // Ejecuta la función para obtener productos
+    fetchProducts();
   }, []);
 
-  // Maneja la eliminación de un producto
+  // Manejar eliminación de producto
   const handleDelete = async (id) => {
     try {
-      await deleteProduct(id); // Llama al servicio para eliminar el producto
-      setProducts(products.filter(product => product.id !== id)); // Actualiza la lista de productos
+      await deleteProduct(id);
+      setProducts(products.filter(product => product.id !== id));
     } catch (err) {
-      setError(err.message); // Maneja errores
+      setError('Failed to delete product.'); // Mensaje de error amigable
     }
   };
 
   return (
     <div>
       <h1>Products List</h1>
-      {error && <p>Error: {error}</p>} {/* Muestra errores */}
-      <Link to="/add-product"><button>Add Product</button></Link> {/* Enlace para agregar un producto */}
+      {error && <p className="error">{error}</p>} {/* Mostrar errores */}
+      <Link to="/add-product"><button>Add Product</button></Link>
       <ul>
         {products.map(product => (
           <li key={product.id}>
-            {product.name} - ${product.price} {/* Muestra nombre y precio del producto */}
-            <button onClick={() => handleDelete(product.id)}>Delete</button> {/* Botón para eliminar */}
-            <Link to={`/products/${product.id}`}>Edit</Link> {/* Enlace para editar */}
+            {product.name} - ${product.price}
+            <button onClick={() => handleDelete(product.id)}>Delete</button>
+            <Link to={`/products/${product.id}`}>Edit</Link>
           </li>
         ))}
       </ul>
@@ -49,4 +49,3 @@ const ProductsList = () => {
 };
 
 export default ProductsList;
-

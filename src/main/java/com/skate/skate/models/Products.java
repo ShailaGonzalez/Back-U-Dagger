@@ -10,7 +10,9 @@ import jakarta.persistence.Table;
 @Table(name = "products")
 public class Products {
 
-    private int id; // Cambiado a int para consistencia con Users
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
+    private Integer id; 
     private String name;
     private Double price;
 
@@ -18,19 +20,15 @@ public class Products {
     public Products() {}
 
     // Constructor con todos los argumentos
-    public Products(int id, String name, Double price) {
-        this.id = id;
-        this.name = name;
+    public Products(Integer id, String name, Double price) { 
         this.price = price;
     }
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    public int getId() {
+    public Integer getId() { 
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) { 
         this.id = id;
     }
 

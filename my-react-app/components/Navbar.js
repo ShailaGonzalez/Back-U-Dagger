@@ -1,30 +1,19 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import UsersList from './components/UsersList';
-import ProductsList from './components/ProductsList';
-import SkateparksList from './components/SkateparksList';
-import ProductForm from './components/ProductForm';
-import Navbar from './components/Navbar';  
+import { Link } from 'react-router-dom';
 
-const App = () => {
+const Navbar = () => {
   return (
-    <Router>
-      <div>
-        <h1>My Skate App</h1>
-        <Navbar /> {/* Incluye el Navbar aquí */}
-        <Switch>
-          <Route path="/users" exact component={UsersList} />
-          <Route path="/products" exact component={ProductsList} />
-          <Route path="/skateparks" exact component={SkateparksList} />
-          <Route path="/products/:id" component={ProductForm} />
-          <Route path="/add-product" component={ProductForm} />
-          <Route path="/" exact>
-            <h2>Welcome Dagger!</h2>
-          </Route>
-        </Switch>
-      </div>
-    </Router>
+    <nav>
+      <ul>
+        <li><Link to="/">Home</Link></li>
+        <li><Link to="/users">Users List</Link></li>
+        <li><Link to="/products">Products List</Link></li>
+        <li><Link to="/skateparks">Skateparks List</Link></li>
+        <li><Link to="/skatepark-map">Skatepark Map</Link></li>
+        <li><Link to="/add-product">Add Product</Link></li>
+      </ul>
+    </nav>
   );
 };
 
-export default App;
+export default Navbar;

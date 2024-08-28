@@ -1,6 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { APIProvider, Map, Marker } from '@vis.gl/react-google-maps';
-import { getSkateparks } from '../services/skateparksService';
+import React, { useState, useEffect } from 'react';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
+import { getSkateparks } from '../services/skateparksService'; // Asegúrate de que esta función esté configurada correctamente
 
 const SkateparksMap = () => {
     const [skateparks, setSkateparks] = useState([]);
@@ -23,21 +24,23 @@ const SkateparksMap = () => {
         <div style={{ height: '500px', width: '100%' }}>
             <h1>Skateparks Map</h1>
             {error && <p>Error: {error}</p>}
-            <APIProvider apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
-                <Map
-                    style={{ height: '100%', width: '100%' }}
-                    defaultCenter={{ lat: 41.3851, lng: 2.1734 }} // Coordenadas para centrar en Barcelona
-                    defaultZoom={12}
-                >
-                    {skateparks.map(skatepark => (
-                        <Marker
-                            key={skatepark.id}
-                            position={{ lat: skatepark.latitude, lng: skatepark.longitude }}
-                            title={skatepark.name}
-                        />
-                    ))}
-                </Map>
-            </APIProvider>
+            <MapContainer center={[41.3851, 2.1734]} zoom={12} style={{ height: '100%', width: '100%' }}>
+                <TileLayer
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    attribution='Map data © <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                />
+                {skateparks.map(skatepark => (
+                    <Marker
+                        key={skatepark.id}
+                        position={[skatepark.latitude, skatepark.longitude]}
+                    >
+                        <Popup>
+                            <strong>{skatepark.name}</strong><br />
+                            {skatepark.location}
+                        </Popup>
+                    </Marker>
+                ))}
+            </MapContainer>
         </div>
     );
 };
