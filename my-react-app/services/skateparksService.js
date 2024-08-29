@@ -9,7 +9,7 @@ export const getSkateparks = async () => {
         return response.data;
     } catch (error) {
         console.error('Error fetching skateparks:', error); // Loggea el error técnico
-        throw new Error('Unable to fetch skateparks. Please try again later.'); // Mensaje amigable para el usuario
+        throw new Error('Unable to fetch skateparks. Please try again later.'); 
     }
 };
 
@@ -20,7 +20,7 @@ export const getSkateparkById = async (id) => {
         return response.data;
     } catch (error) {
         console.error('Error fetching skatepark by ID:', error); // Loggea el error técnico
-        throw new Error('Unable to fetch skatepark details. Please try again later.'); // Mensaje amigable para el usuario
+        throw new Error('Unable to fetch skatepark details. Please try again later.'); 
     }
 };
 
@@ -31,6 +31,6 @@ export const updateSkatepark = async (id, skatepark) => {
         return response.data;
     } catch (error) {
         console.error('Error updating skatepark:', error); // Loggea el error técnico
-        throw new Error('Unable to update skatepark. Please try again later.'); // Mensaje amigable para el usuario
+        throw new Error('Unable to update skatepark. Please try again later.'); 
     }
 };

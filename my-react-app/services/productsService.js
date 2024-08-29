@@ -9,7 +9,7 @@ export const getProducts = async () => {
         return response.data;
     } catch (error) {
         console.error('Error fetching products:', error); // Loggea el error técnico
-        throw new Error('Unable to fetch products. Please try again later.'); // Mensaje amigable para el usuario
+        throw new Error('Unable to fetch products. Please try again later.'); 
     }
 };
 
@@ -20,7 +20,7 @@ export const createProduct = async (product) => {
         return response.data;
     } catch (error) {
         console.error('Error creating product:', error); // Loggea el error técnico
-        throw new Error('Unable to create product. Please try again later.'); // Mensaje amigable para el usuario
+        throw new Error('Unable to create product. Please try again later.'); 
     }
 };
 
@@ -31,7 +31,7 @@ export const getProductById = async (id) => {
         return response.data;
     } catch (error) {
         console.error('Error fetching product by ID:', error); // Loggea el error técnico
-        throw new Error('Unable to fetch product details. Please try again later.'); // Mensaje amigable para el usuario
+        throw new Error('Unable to fetch product details. Please try again later.'); 
     }
 };
 
@@ -42,7 +42,7 @@ export const updateProduct = async (id, product) => {
         return response.data;
     } catch (error) {
         console.error('Error updating product:', error); // Loggea el error técnico
-        throw new Error('Unable to update product. Please try again later.'); // Mensaje amigable para el usuario
+        throw new Error('Unable to update product. Please try again later.'); 
     }
 };
 
@@ -52,6 +52,6 @@ export const deleteProduct = async (id) => {
         await axios.delete(`${API_URL}/${id}`);
     } catch (error) {
         console.error('Error deleting product:', error); // Loggea el error técnico
-        throw new Error('Unable to delete product. Please try again later.'); // Mensaje amigable para el usuario
+        throw new Error('Unable to delete product. Please try again later.'); 
     }
 };

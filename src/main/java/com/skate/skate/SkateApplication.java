@@ -8,7 +8,7 @@ public class SkateApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(SkateApplication.class, args);
-		System.out.println("Hello, Welcome back!");
+		System.out.println("Hello Dagger! Welcome back!");
 	}
 
 }

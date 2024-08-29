@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3001/users'; // Cambia la URL según la configuración de tu backend
+const API_URL = 'http://localhost:3001/users'; // Cambia la URL según la configuración de mi backend
 
 // Obtener todos los usuarios
 export const getUsers = async () => {
@@ -9,7 +9,7 @@ export const getUsers = async () => {
         return response.data;
     } catch (error) {
         console.error('Error fetching users:', error); // Loggea el error técnico
-        throw new Error('Unable to fetch users. Please try again later.'); // Mensaje amigable para el usuario
+        throw new Error('Unable to fetch users. Please try again later.'); 
     }
 };
 
@@ -20,7 +20,7 @@ export const createUser = async (user) => {
         return response.data;
     } catch (error) {
         console.error('Error creating user:', error); // Loggea el error técnico
-        throw new Error('Unable to create user. Please try again later.'); // Mensaje amigable para el usuario
+        throw new Error('Unable to create user. Please try again later.'); 
     }
 };
 
@@ -31,7 +31,7 @@ export const getUserById = async (id) => {
         return response.data;
     } catch (error) {
         console.error('Error fetching user by ID:', error); // Loggea el error técnico
-        throw new Error('Unable to fetch user details. Please try again later.'); // Mensaje amigable para el usuario
+        throw new Error('Unable to fetch user details. Please try again later.'); 
     }
 };
 
@@ -42,7 +42,7 @@ export const updateUser = async (id, user) => {
         return response.data;
     } catch (error) {
         console.error('Error updating user:', error); // Loggea el error técnico
-        throw new Error('Unable to update user. Please try again later.'); // Mensaje amigable para el usuario
+        throw new Error('Unable to update user. Please try again later.'); 
     }
 };
 
@@ -52,6 +52,6 @@ export const deleteUser = async (id) => {
         await axios.delete(`${API_URL}/${id}`);
     } catch (error) {
         console.error('Error deleting user:', error); // Loggea el error técnico
-        throw new Error('Unable to delete user. Please try again later.'); // Mensaje amigable para el usuario
+        throw new Error('Unable to delete user. Please try again later.'); 
     }
 };

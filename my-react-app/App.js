@@ -1,10 +1,9 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import UsersList from './components/UsersList'; // Lista de usuarios
-import UserForm from './components/UserForm'; // Formulario para agregar o editar usuarios
+import UserForm from './components/UserForm'; // agregar o editar usuarios
 import ProductsList from './components/ProductsList'; // Lista de productos
-import ProductForm from './components/ProductForm'; // Formulario para agregar o editar productos
+import ProductForm from './components/ProductForm'; //  agregar o editar productos
 import SkateparksList from './components/SkateparksList'; // Lista de skateparks
 import SkateparkMap from './components/SkateparkMap'; // Mapa de skateparks
 import Navbar from './components/Navbar'; // Navegación

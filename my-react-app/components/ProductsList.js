@@ -14,7 +14,7 @@ const ProductsList = () => {
         const data = await getProducts();
         setProducts(data);
       } catch (err) {
-        setError('Failed to fetch products.'); // Mensaje de error amigable
+        setError('Failed to fetch products.'); 
       }
     };
     fetchProducts();
@@ -26,7 +26,7 @@ const ProductsList = () => {
       await deleteProduct(id);
       setProducts(products.filter(product => product.id !== id));
     } catch (err) {
-      setError('Failed to delete product.'); // Mensaje de error amigable
+      setError('Failed to delete product.'); 
     }
   };
 
