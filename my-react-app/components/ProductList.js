@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { getProducts, deleteProduct } from '../services/productService';
 import { Link } from 'react-router-dom';
 
-const ProductsList = () => {
+const ProductList = () => {
   // Estados para productos y errores
   const [products, setProducts] = useState([]);
   const [error, setError] = useState(null);

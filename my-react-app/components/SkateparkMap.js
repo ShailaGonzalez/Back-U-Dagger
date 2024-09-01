@@ -3,7 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import { getSkateparks } from '../services/skateparksService'; // Asegúrate de que esta función esté configurada correctamente
 
-const SkateparksMap = () => {
+const SkateparkMap = () => {
     const [skateparks, setSkateparks] = useState([]);
     const [error, setError] = useState(null);
 

@@ -11,7 +11,6 @@ import java.util.Optional;
 
 @Service
 public class ProductsService {
-
     private final ProductsRepository productsRepository;
 
     public ProductsService(ProductsRepository productsRepository) {
@@ -61,4 +60,3 @@ public class ProductsService {
             return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
         }
     }
-}

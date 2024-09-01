@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { getSkateparks } from '../services/skateparkService';
 import { Link } from 'react-router-dom';
 
-const SkateparksList = () => {
+const SkateparkList = () => {
   const [skateparks, setSkateparks] = useState([]);
   const [error, setError] = useState(null);
 
