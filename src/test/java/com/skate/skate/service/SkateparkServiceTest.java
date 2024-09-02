@@ -45,8 +45,10 @@ class SkateparkServiceTest {
 
         when(skateparkRepository.findAll()).thenReturn(Arrays.asList(skatepark1, skatepark2));
 
+        // Ejecutar el servicio
         var skateparks = skateparkService.getAllSkateparks();
 
+        // Verificar resultados
         assertEquals(2, skateparks.size());
         assertEquals("Skatepark1", skateparks.get(0).getName());
     }
@@ -79,5 +81,15 @@ class SkateparkServiceTest {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(skatepark, response.getBody());
+    }
+
+    @Test
+    void testGetSkateparkByIdNotFound() {
+        when(skateparkRepository.findById(anyInt())).thenReturn(Optional.empty());
+
+        ResponseEntity<Object> response = skateparkService.getSkateparkById(999);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals("Skatepark not found", response.getBody());
     }
 }
