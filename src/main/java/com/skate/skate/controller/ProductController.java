@@ -1,10 +1,9 @@
 package com.skate.skate.controller;
 
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-
 import com.skate.skate.model.Product;
 import com.skate.skate.service.ProductService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,22 +23,22 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> createProduct(@RequestBody Product product) {
+    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
         return productsService.createProduct(product);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getProductById(@PathVariable Integer id) {
+    public ResponseEntity<Product> getProductById(@PathVariable Integer id) {
         return productsService.getProductById(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateProduct(@PathVariable Integer id, @RequestBody Product product) {
+    public ResponseEntity<Product> updateProduct(@PathVariable Integer id, @RequestBody Product product) {
         return productsService.updateProduct(id, product);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteProduct(@PathVariable Integer id) {
+    public ResponseEntity<String> deleteProduct(@PathVariable Integer id) {
         return productsService.deleteProduct(id);
     }
 }

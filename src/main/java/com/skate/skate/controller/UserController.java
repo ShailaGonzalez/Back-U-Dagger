@@ -1,53 +1,47 @@
 package com.skate.skate.controller;
 
-import java.util.List;
-
-import org.springframework.web.bind.annotation.RestController;
-
 import com.skate.skate.model.User;
 import com.skate.skate.service.UserService;
-
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
+@RequestMapping("/users") // Se puede usar un RequestMapping para la ruta base
 public class UserController {
 
-    private final UserService usersService;
+    private final UserService userService;
 
-    public UserController(UserService usersService) {
-        this.usersService = usersService;
-
+    // El constructor ya no necesita @Autowired
+    public UserController(UserService userService) {
+        this.userService = userService;
     }
 
-    @GetMapping("/users") /// hacer el get en postman
-    public List<User> getUsers() {
-        return usersService.getUsers();
-   }
-
-    @PostMapping("/users") /// hacer el post en postman y comprobarlo en pgadmin
-    public ResponseEntity<Object> addUsers(@RequestBody User users) {
-        return usersService.addUsers(users);
-    }
-    
-    @GetMapping("/users/{id}")
-    public ResponseEntity<Object> getUserById(@PathVariable Integer id) {
-        return usersService.getUserById(id);
+    @GetMapping
+    public ResponseEntity<List<User>> getUsers() {
+        List<User> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
     }
 
-    @PutMapping("/users/{id}")
-    public ResponseEntity<Object> updateUser(@PathVariable Integer id, @RequestBody User updatedUser) {
-        return usersService.updateUser(id, updatedUser);
+    @PostMapping
+    public ResponseEntity<User> addUser(@RequestBody User user) {
+        return userService.createUser(user);
     }
 
-    @DeleteMapping("/users/{id}")
-    public ResponseEntity<Object> deleteUser(@PathVariable Integer id) {
-        return usersService.deleteUser(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
+        return userService.getUserById(id);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<User> updateUser(@PathVariable Integer id, @RequestBody User updatedUser) {
+        return userService.updateUser(id, updatedUser);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteUser(@PathVariable Integer id) {
+        return userService.deleteUser(id);
     }
 }
 
