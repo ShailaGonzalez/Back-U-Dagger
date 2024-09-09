@@ -1,11 +1,10 @@
 package com.skate.skate.service;
 
+import com.skate.skate.model.Skatepark;
+import com.skate.skate.repository.SkateparkRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-
-import com.skate.skate.model.Skatepark;
-import com.skate.skate.repository.SkateparkRepository;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,53 +12,21 @@ import java.util.Optional;
 @Service
 public class SkateparkService {
 
-    private final SkateparkRepository skateparksRepository;
+    private final SkateparkRepository skateparkRepository;
 
-    public SkateparkService(SkateparkRepository skateparksRepository) {
-        this.skateparksRepository = skateparksRepository;
+    public SkateparkService(SkateparkRepository skateparkRepository) {
+        this.skateparkRepository = skateparkRepository;
     }
 
-    // Obtener todos los skateparks
-    public List<Skatepark> getAllSkateparks() {
-        return skateparksRepository.findAll();
+    public ResponseEntity<List<Skatepark>> getAllSkateparks() {
+        List<Skatepark> skateparks = skateparkRepository.findAll();
+        return new ResponseEntity<>(skateparks, HttpStatus.OK);
     }
 
-    // Agregar un nuevo skatepark
-    public ResponseEntity<Object> createSkatepark(Skatepark skatepark) {
-        skateparksRepository.save(skatepark);
-        return new ResponseEntity<>(skatepark, HttpStatus.CREATED);
-    }
-
-    // Obtener un skatepark por ID
-    public ResponseEntity<Object> getSkateparkById(Integer id) {
-        Optional<Skatepark> skatepark = skateparksRepository.findById(id);
-        if (skatepark.isPresent()) {
-            return new ResponseEntity<>(skatepark.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Skatepark not found", HttpStatus.NOT_FOUND);
-        }
-    }
-
-    // Actualizar un skatepark existente
-    public ResponseEntity<Object> updateSkatepark(Integer id, Skatepark updatedSkatepark) {
-        Optional<Skatepark> existingSkatepark = skateparksRepository.findById(id);
-        if (existingSkatepark.isPresent()) {
-            updatedSkatepark.setId(id);
-            skateparksRepository.save(updatedSkatepark);
-            return new ResponseEntity<>(updatedSkatepark, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Skatepark not found", HttpStatus.NOT_FOUND);
-        }
-    }
-
-    // Eliminar un skatepark
-    public ResponseEntity<Object> deleteSkatepark(Integer id) {
-        Optional<Skatepark> skatepark = skateparksRepository.findById(id);
-        if (skatepark.isPresent()) {
-            skateparksRepository.deleteById(id);
-            return new ResponseEntity<>("Skatepark deleted successfully", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Skatepark not found", HttpStatus.NOT_FOUND);
-        }
+    public ResponseEntity<Skatepark> getSkateparkById(int id) {
+        Optional<Skatepark> skatepark = skateparkRepository.findById(id);
+        return skatepark
+                .map(p -> new ResponseEntity<>(p, HttpStatus.OK))
+                .orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 }

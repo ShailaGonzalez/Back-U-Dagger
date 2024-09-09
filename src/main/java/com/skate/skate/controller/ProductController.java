@@ -2,7 +2,6 @@ package com.skate.skate.controller;
 
 import com.skate.skate.model.Product;
 import com.skate.skate.service.ProductService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -11,34 +10,34 @@ import java.util.List;
 @RequestMapping("/products")
 public class ProductController {
 
-    private final ProductService productsService;
+    private final ProductService productService;
 
-    public ProductController(ProductService productsService) {
-        this.productsService = productsService;
+    public ProductController(ProductService productService) {
+        this.productService = productService;
     }
 
     @GetMapping
     public List<Product> getAllProducts() {
-        return productsService.getAllProducts();
+        return productService.getAllProducts();
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        return productsService.createProduct(product);
+    public Product createProduct(@RequestBody Product product) {
+        return productService.createProduct(product);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Integer id) {
-        return productsService.getProductById(id);
+    public Product getProductById(@PathVariable Integer id) {
+        return productService.getProductById(id);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Integer id, @RequestBody Product product) {
-        return productsService.updateProduct(id, product);
+    public Product updateProduct(@PathVariable Integer id, @RequestBody Product product) {
+        return productService.updateProduct(id, product);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteProduct(@PathVariable Integer id) {
-        return productsService.deleteProduct(id);
+    public void deleteProduct(@PathVariable Integer id) {
+        productService.deleteProduct(id);
     }
 }

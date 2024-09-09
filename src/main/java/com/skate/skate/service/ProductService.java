@@ -2,62 +2,42 @@ package com.skate.skate.service;
 
 import com.skate.skate.model.Product;
 import com.skate.skate.repository.ProductRepository;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class ProductService {
-    private final ProductRepository productsRepository;
 
-    public ProductService(ProductRepository productsRepository) {
-        this.productsRepository = productsRepository;
-    }
+    @Autowired
+    private ProductRepository productRepository;
 
-    // Obtener todos los productos
     public List<Product> getAllProducts() {
-        return productsRepository.findAll();
+        return productRepository.findAll();
     }
 
-    // Agregar un nuevo producto
-    public ResponseEntity<Product> createProduct(Product product) {
-        Product savedProduct = productsRepository.save(product);
-        return new ResponseEntity<>(savedProduct, HttpStatus.CREATED);
+    public Product createProduct(Product product) {
+        return productRepository.save(product);
     }
 
-    // Obtener un producto por ID
-    public ResponseEntity<Product> getProductById(Integer id) {
-        Optional<Product> product = productsRepository.findById(id);
-        if (product.isPresent()) {
-            return new ResponseEntity<>(product.get(), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public Product getProductById(Integer id) {
+        return productRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Product not found with id " + id));
+    }
+
+    public Product updateProduct(Integer id, Product product) {
+        if (!productRepository.existsById(id)) {
+            throw new RuntimeException("Product not found with id " + id);
         }
+        product.setId(id);
+        return productRepository.save(product);
     }
 
-    // Actualizar un producto existente
-    public ResponseEntity<Product> updateProduct(Integer id, Product updatedProduct) {
-        Optional<Product> existingProduct = productsRepository.findById(id);
-        if (existingProduct.isPresent()) {
-            updatedProduct.setId(id);
-            Product savedProduct = productsRepository.save(updatedProduct);
-            return new ResponseEntity<>(savedProduct, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public void deleteProduct(Integer id) {
+        if (!productRepository.existsById(id)) {
+            throw new RuntimeException("Product not found with id " + id);
         }
-    }
-
-    // Eliminar un producto
-    public ResponseEntity<String> deleteProduct(Integer id) {
-        Optional<Product> product = productsRepository.findById(id);
-        if (product.isPresent()) {
-            productsRepository.deleteById(id);
-            return new ResponseEntity<>("Product deleted successfully", HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>("Product not found", HttpStatus.NOT_FOUND);
-        }
+        productRepository.deleteById(id);
     }
 }

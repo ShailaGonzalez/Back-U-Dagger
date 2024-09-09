@@ -2,31 +2,28 @@ package com.skate.skate.controller;
 
 import com.skate.skate.model.Skatepark;
 import com.skate.skate.service.SkateparkService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/skateparks")
+@RequestMapping("/skateparks")
 public class SkateparkController {
 
-    @Autowired
-    private SkateparkService skateparkService;
+    private final SkateparkService skateparkService;
+
+    public SkateparkController(SkateparkService skateparkService) {
+        this.skateparkService = skateparkService;
+    }
 
     @GetMapping
-    public List<Skatepark> getAllSkateparks() {
+    public ResponseEntity<List<Skatepark>> getAllSkateparks() {
         return skateparkService.getAllSkateparks();
     }
 
-    @PostMapping
-    public ResponseEntity<Object> createSkatepark(@RequestBody Skatepark skatepark) {
-        return skateparkService.createSkatepark(skatepark);
-    }
-
     @GetMapping("/{id}")
-    public ResponseEntity<Object> getSkateparkById(@PathVariable Integer id) {
+    public ResponseEntity<Skatepark> getSkateparkById(@PathVariable int id) {
         return skateparkService.getSkateparkById(id);
     }
 }
